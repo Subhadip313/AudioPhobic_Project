@@ -1,0 +1,160 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+.intro{
+	position: relative;
+}
+.intro img {
+	max-width: 100%;
+	max-height: 100%;
+}
+.topnavbar{
+	position: absolute;
+	top:0;
+	width: 100%;
+}
+.topnavbar a{
+	text-decoration: none;
+	color:#000;
+	padding: 12px 14px;
+	display: inline-block;
+	font-family: 'Raleway', sans-serif;
+	float: right;
+	margin:10px;
+	
+}
+
+.topnavbar a:hover{
+box-shadow: inset 0 0 0 4px #000, 0 0 1px rgba(0, 0, 0, 0);
+transition-duration: 0.3s;
+}
+
+
+.hl {
+  border-top: 6px solid #000;
+  width:75px;
+  position: absolute;
+  left: 25px;
+  margin-left: -3px;
+  top: 31%;
+}
+.intro_quotes {
+	font-family: 'Bitter', serif;
+	font-size:30px;
+	color:#fff;
+}
+.intro_quotes_container{
+	position:absolute; 
+	top:30%;
+	left:20px;
+}
+.intro_quotes_para{
+	color:#777;
+	width: 480px;
+}
+
+/*For making the Register form*/
+* {box-sizing: border-box;}
+/* Set a style for all buttons */
+.login_button {
+  background: #000;
+  color:#fff;
+  width: 120px;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  opacity: 0.9;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  transition-duration: 0.5s;
+}
+
+.login_button:hover {
+	transform: scale(1.2);
+ 	transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0,0.3);
+  padding-top: 50px;
+}
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 60px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  /*border: 1px solid #888;*/
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+/* Add padding to container elements */
+.container {
+  padding: 40px;
+  padding-top: 10px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+/* Style the horizontal ruler */
+.container hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+/* Full-width input fields */
+  input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #d9d9d9;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ccc;
+  outline: none;
+}
+.container_button{
+	float: left;
+	width: 50%;
+	padding: 12px 14px;
+	cursor: pointer;
+	border: none;
+}
+.register_button{
+	border: none;
+    text-decoration: underline;
+    font-size: 18px;
+    background: none;
+    cursor: pointer;
+}

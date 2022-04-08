@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AudioPhobic-Testing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="style.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+body{
+margin:0;
+padding:0;
+}
+
+.player{
+	height:400px;
+	width:50%;
+	margin:5% auto 15% auto;
+	background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);
+
+}
+
+.slider-container {
+margin-top:60px;
+	position: relative;
+	    width: 40%;
+}
+.slider-container .bar {
+	position: absolute;
+	z-index: 1;
+	left: 15px;
+	right: 15px;
+	top: 7px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: #5c5c5c;
+	overflow: hidden;
+}
+.slider-container .bar .fill {
+	display: block;
+	width:10%;
+	height: 100%;
+	background-color: #0f9d58;
+}
+.slider-container .slider {
+	position: relative;
+	z-index: 2;
+	-webkit-appearance: none;
+	margin: 0;
+	width: 100%;
+	height: 10px;
+	border-radius: 5px;
+	outline: none;
+	background-color: transparent;
+}
+.slider-container .slider::-webkit-slider-thumb {
+	 -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+.slider-container .slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+/*.slider-container .slider:active::-webkit-slider-thumb,
+.slider-container .slider::-webkit-slider-thumb:hover {
+	border-bottom-left-radius: 0;
+	transform: rotate(-45deg) translate(75%, -75%);
+}
+.slider-container .slider:active::-webkit-slider-thumb {
+	box-shadow: 0 0 0 10px rgba(255,255,255,1);
+}*/
+/*for making the progress bar*/
+.progress-container{
+	margin-top:60px;
+	position: relative;
+	width: 100%;
+}
+.progress-container .progress_bar{
+	position: absolute;
+    z-index: 1;
+    left: 25px;
+    right: 25px;
+    top: 29px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #5c5c5c;
+    overflow: hidden;
+}
+.progress-container .progress_bar .progress_fill{
+	display: block;
+	width:0;
+	height: 100%;
+	background-color: #0f9d58;
+}
+.progress-container .progress{
+	position: relative;
+	z-index: 2;
+	-webkit-appearance: none;
+	margin: 0;
+	width: 100%;
+	height: 10px;
+	border-radius: 5px;
+	outline: none;
+	background-color: transparent;
+}
+.progress-container .progress::-webkit-slider-thumb {
+-webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<!--<span style="">Professor Sanku O Gorilla - Satyajit Roy</span><br>-->
+<audio id="player" src="home_audio\Professor Sanku O Gorilla.mp3"></audio>
+<div class="player">
+<div class="info">
+
+</div>
+<div class="controls">
+<button class="play-pause" style="cursor: pointer;" type="button"><i id="btn" class="fa-play fa" style="font-size:36px;"></i></button>
+
+<div class="slider-container">
+<span class="bar"><span class="fill"></span></span>
+  <input type="range" min="0" max="100" value="10" step="1" class="slider" id="slider">
+</div>
+<p style="padding:20px;"><i class='fa fa-volume-down' style='font-size:20px'></i><span id="demo" style='font-size:20px'></span></p>
+
+</div>
+<div class="progress-container" style="padding:25px;">
+	<span class="progress_bar"><span class="progress_fill"></span></span>
+<input type="range" value="0" class="progress" id="progress" min="0" max="100" step="0.1" value="0" style="width:100%;">
+<p>Duration: <span id="status"></span></p>
+</div>
+
+</div>
+
+
+<script>
+//$progress_fill.css("width", $progress_slider.val() + "%");
+var audio = document.getElementById("player");
+//for connecting the progress slider with audio
+	var $progress_fill = $(".progress_bar .progress_fill");
+	var $progress_slider = $("#progress");
+
+$(document).ready(function(){
+	$(".play-pause").click(function(){
+		if (audio.paused == true){
+			audio.play();
+			$("#btn").toggleClass("fa-pause",true);
+			$("#btn").addClass("fa");
+			$("#btn").toggleClass("fa-play",false);
+			
+			}else{
+		audio.pause();
+		$("#btn").toggleClass("fa-play",true);
+		$("#btn").addClass("fa");
+		$("#btn").toggleClass("fa-pause",false);
+		}
+	});
+});
+//to make sure if the audio ended then change the pause button
+ $(audio).on('ended', function(){
+     
+      if($("#btn").hasClass("fa") && $("#btn").hasClass("fa-pause")){
+      	
+      	$("#btn").toggleClass("fa-pause");
+		$("#btn").addClass("fa-play");
+      }
+  });
+
+
+// Assign an ontimeupdate event to the audio element, and execute a function if the current playback position has changed
+	$("#progress").on("input",function(n){
+            audio.currentTime = this.value * audio.duration / 100;
+            audio.play();
+    //to make sure if currentTime is > 0 the #btn class will be pause
+		if(audio.currentTime > 0){
+		$("#btn").toggleClass("fa-play");
+		$("#btn").addClass("fa-pause");
+		}
+        })
+	$(audio).on('timeupdate', function(){
+    var percent = audio.currentTime/ audio.duration * 100;
+    $("#progress").val(percent).change();
+
+    $("#status").text(Math.round(percent*100)/100+"%");
+$progress_fill.css("width", $progress_slider.val() + "%");
+});
+	
+
+
+
+//to make sure if currentTime is > 0 the #btn class will be pause
+if(audio.currentTime > 0){
+	$("#btn").toggleClass("fa-play");
+		$("#btn").addClass("fa-pause");
+}
+
+//for connecting the volume slider with the audio
+	audio.volume = 0.1;
+	var $fill = $(".bar .fill");
+	var $slider = $("#slider");
+	//var slider = document.getElementById("slider");
+	var output = document.getElementById("demo");
+	output.innerHTML = $slider.val();
+	slider.oninput = function() {
+	$fill.css("width", $slider.val() + "%");
+	output.innerHTML = $slider.val();
+	
+	audio.volume = ($slider.val() / 100);
+
+	
+}
+//for creating the audio progress bar
+/*$("#progress").rangeslider({
+    polyfill: false,
+    onSlideEnd: function(position, value){
+        audio.currentTime = audio.duration * value / 100;
+    }
+});*/
+
+
+	
+
+
+	
+	 
+</script>
+</body>
+</html>
